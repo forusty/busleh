@@ -7,7 +7,7 @@ var bot = new TelegramBot(token, {
     polling: true
 });
 
-bot.onText(/\/busStop (.+)/, function(msg, match) {
+bot.onText(/\/bus_stop (.+)/, function(msg, match) {
     var chatId = msg.chat.id;
     var resp = match[1];
 
