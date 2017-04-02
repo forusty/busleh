@@ -52,18 +52,21 @@ bot.onText(/\/bus_stop (.+)/, function(msg, match) {
                 if (bus['Status'] === 'In Operation') {
                     // first bus
                     var nextBus = bus['NextBus'];
-                    var minutues = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
-                    busObj += "Next Bus :" + minutues + " minutes\n";
+                    var minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
+                    busObj += "Next Bus : ";
+                    busObj += minutes<=1 ? "now\n" : minutes + " minutes\n";
 
                     // second bus
                     nextBus = bus['SubsequentBus'];
-                    minutues = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
-                    busObj += "Next Bus :" + minutues + " minutes\n";
+                    minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
+                    busObj += "Next Bus : ";
+                    busObj += minutes<=1 ? "now\n" : minutes + " minutes\n";
 
                     // third bus
                     nextBus = bus['SubsequentBus3'];
-                    minutues = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
-                    busObj += "Next Bus :" + minutues + " minutes\n";
+                    minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
+                    busObj += "Next Bus : ";
+                    busObj += minutes<=1 ? "now\n" : minutes + " minutes\n";
                 } else {
                     busObj += "Bus not in service";
                 }
@@ -102,9 +105,9 @@ bot.onText(/\/bus_stop (.+)/, function(msg, match) {
 function timeDiff(nowMili, busMili) {
     var diff = busMili - nowMili;
     if (diff <= 0) {
-        diff = "Now";
+        diff = 0;
     } else {
         diff = diff / 1000 / 60
     }
-    return Math.round(diff);
+    return Math.floor(diff);
 }
