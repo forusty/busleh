@@ -56,22 +56,22 @@ bot.onText(/\/bus_stop (.+)/, function(msg, match) {
                     var nextBus = bus['NextBus'];
                     var minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
                     busObj += "Next Bus : ";
-                    busObj += minutes<=1 ? "now\n" : minutes + " minutes\n";
-                    busObj += nextBus['Load']+"\n";
+                    busObj += minutes<=1 ? "Now " : minutes + " minutes ";
+                    busObj += "( "+nextBus['Load']+" )\n";
 
                     // second bus
                     nextBus = bus['SubsequentBus'];
                     minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
                     busObj += "Next Bus : ";
-                    busObj += minutes<=1 ? "now\n" : minutes + " minutes\n";
-                    busObj += nextBus['Load']+"\n";
+                    busObj += minutes<=1 ? "Now " : minutes + " minutes ";
+                    busObj += "( "+nextBus['Load']+" )\n";
 
                     // third bus
                     nextBus = bus['SubsequentBus3'];
                     minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
                     busObj += "Next Bus : ";
-                    busObj += minutes<=1 ? "now\n" : minutes + " minutes\n";
-                    busObj += nextBus['Load']+"\n";
+                    busObj += minutes<=1 ? "Now " : minutes + " minutes ";
+                    busObj += "( "+nextBus['Load']+" )\n";
                 } else {
                     busObj += "Bus not in service\n";
                 }
@@ -85,7 +85,7 @@ bot.onText(/\/bus_stop (.+)/, function(msg, match) {
             else
             {
             // photo can be: a file path, a stream or a Teleram file_id
-            bot.sendMessage(chatId, "Unknown bus number");
+            bot.sendMessage(chatId, "UnkNown bus number");
             }
 
             // your code here if you want to use the results !
@@ -100,8 +100,8 @@ bot.onText(/\/bus_stop (.+)/, function(msg, match) {
     reqGet.end();
 });
 
-function timeDiff(nowMili, busMili) {
-    var diff = busMili - nowMili;
+function timeDiff(NowMili, busMili) {
+    var diff = busMili - NowMili;
     if (diff <= 0) {
         diff = 0;
     } else {
