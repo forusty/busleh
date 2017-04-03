@@ -73,7 +73,7 @@ bot.onText(/\/bus_stop (.+)/, function(msg, match) {
                     busObj += minutes<=1 ? "now\n" : minutes + " minutes\n";
                     busObj += nextBus['Load']+"\n";
                 } else {
-                    busObj += "Bus not in service";
+                    busObj += "Bus not in service\n";
                 }
                 busObj += "=============================\n"
                 busObj+="\n";
