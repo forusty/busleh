@@ -26,6 +26,8 @@ module.exports = {
         // This informs the Telegram servers of the new webhook.
         // Note: we do not need to pass in the cert, as it already provided
         bot.setWebHook(`${url}/bot${TOKEN}`);
+
+        
   //       var token = '***REMOVED***';
 		// // Setup polling way
 		// var bot = new TelegramBot(token, {

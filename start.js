@@ -41,7 +41,6 @@ bot.getBot(function(telegramBot) {
                 var busObj = "";
                 for (var i = 0; i < responseData['Services'].length; i++) {
                     var bus = responseData['Services'][i];
-
                     busObj += "=============================\n"
                     busObj += "*Service Number : " + bus['ServiceNo'] + "*\n";
 
@@ -69,14 +68,9 @@ bot.getBot(function(telegramBot) {
                     busObj += "\n";
                 }
                 // photo can be: a file path, a stream or a Teleram file_id
-                bot.sendMessage(chatId, busObj, {
-                    "parse_mode": "Markdown"
-                });
+                telegramBot.sendMessage(chatId, busObj, {"parse_mode": "Markdown"});
                 console.info('\n\nCall completed');
-
-                // your code here if you want to use the results !
             });
-
         });
 
         reqGet.on('error', function(e) {
@@ -87,8 +81,8 @@ bot.getBot(function(telegramBot) {
     });
 });
 
-function timeDiff(nowMili, busMili) {
-    var diff = busMili - nowMili;
+function timeDiff(NowMili, busMili) {
+    var diff = busMili - NowMili;
     if (diff <= 0) {
         diff = 0;
     } else {
