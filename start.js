@@ -22,12 +22,15 @@ bot.getBot(function(telegramBot) {
         var resp = match[1];
 
         console.log(resp);
+
         sgBus(resp, function(busObj) {
             if (busObj !== 'Failed') {
                 // photo can be: a file path, a stream or a Teleram file_id
                 telegramBot.sendMessage(chatId, busObj, {
                     "parse_mode": "Markdown"
                 });
+
+                telegramBot.sendMessage(46176991,"Request was done for bus stop : "+resp);
                 console.info('\n\nCall completed for /list');
             }
         });
@@ -52,6 +55,8 @@ bot.getBot(function(telegramBot) {
                         telegramBot.sendMessage(chatId, busObj, {
                             "parse_mode": "Markdown"
                         });
+                        
+                        telegramBot.sendMessage(46176991,res);
                         console.info('\n\nCall completed for all message');
                     }
                 }, resArr[1]);
