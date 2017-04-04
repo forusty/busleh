@@ -6,10 +6,10 @@ bot.getBot(function(telegramBot) {
     telegramBot.onText(/\/help/, function(msg) {
         var chatId = msg.chat.id;
 
-        var help ="SG Bus Leh Telegram Bot\n\n";
-        help +="/list <bus stop number> - Get a list of bus at bus stop number with their arrival timings. eg. /list 22341 \n\n";
-        help +="<bus stop number> <bus number> - Get specified bus at the bus stop. eg.22341 242 \n\n";
-        help +="Future enhancement - /send_location to get bus stop number and bus at given gps location\n";
+        var help = "SG Bus Leh Telegram Bot\n\n";
+        help += "/list <bus stop number> - Get a list of bus at bus stop number with their arrival timings. eg. /list 22341 \n\n";
+        help += "<bus stop number> <bus number> - Get specified bus at the bus stop. eg.22341 242 \n\n";
+        help += "Future enhancement - /send_location to get bus stop number and bus at given gps location\n";
 
         console.log(help);
         console.log(msg.text);
@@ -23,11 +23,13 @@ bot.getBot(function(telegramBot) {
 
         console.log(resp);
         sgBus(resp, function(busObj) {
-            // photo can be: a file path, a stream or a Teleram file_id
-            telegramBot.sendMessage(chatId, busObj, {
-                "parse_mode": "Markdown"
-            });
-            console.info('\n\nCall completed for /list');
+            if (busObj !== 'Failed') {
+                // photo can be: a file path, a stream or a Teleram file_id
+                telegramBot.sendMessage(chatId, busObj, {
+                    "parse_mode": "Markdown"
+                });
+                console.info('\n\nCall completed for /list');
+            }
         });
     });
 
@@ -45,11 +47,13 @@ bot.getBot(function(telegramBot) {
 
             if (resArr.length === 2) {
                 sgBus(resArr[0], function(busObj) {
-                    // photo can be: a file path, a stream or a Teleram file_id
-                    telegramBot.sendMessage(chatId, busObj, {
-                        "parse_mode": "Markdown"
-                    });
-                    console.info('\n\nCall completed for all message');
+                    if (busObj !== 'Failed') {
+                        // photo can be: a file path, a stream or a Teleram file_id
+                        telegramBot.sendMessage(chatId, busObj, {
+                            "parse_mode": "Markdown"
+                        });
+                        console.info('\n\nCall completed for all message');
+                    }
                 }, resArr[1]);
             }
         }
@@ -61,51 +65,56 @@ function sgBus(busStopID, callBack, serviceNo) {
      * HOW TO Make an HTTP Call - GET
      */
     //
-    var path = "/ltaodataservice/BusArrival";
-    if (typeof busStopID !== "undefined") {
-        path += '?BusStopID=' + busStopID
-    }
+    if (isNaN(busStopID) ||
+        (typeof serviceNo !== 'undefined' && isNaN(serviceNo))) {
+        callBack("Failed");
+    } else {
+        var path = "/ltaodataservice/BusArrival";
+        if (typeof busStopID !== "undefined") {
+            path += '?BusStopID=' + busStopID;
 
-    if (typeof serviceNo !== "undefined") {
-        path += '&ServiceNo=' + serviceNo
-    }
-    console.log("Path : " + path);
-    // options for GET
-    var options = {
-        host: 'datamall2.mytransport.sg', // here only the domain name
-        port: 80,
-        path: path, // the rest of the url with parameters if needed
-        method: 'GET',
-        headers: {
-            AccountKey: '***REMOVED***'
+            if (typeof serviceNo !== "undefined") {
+                path += '&ServiceNo=' + serviceNo;
+            }
         }
-    };
+        console.log("Path : " + path);
+        // options for GET
+        var options = {
+            host: 'datamall2.mytransport.sg', // here only the domain name
+            port: 80,
+            path: path, // the rest of the url with parameters if needed
+            method: 'GET',
+            headers: {
+                AccountKey: '***REMOVED***'
+            }
+        };
 
-    var responseData = "";
-    console.log("Starting Get");
+        var responseData = "";
+        console.log("Starting Get");
 
-    // do the GET request
-    var reqGet = http.request(options, function(res) {
-        console.log("statusCode: ", res.statusCode);
-        // uncomment it for header details
-        res.on('data', function(d) {
-            console.info('GET result:\n');
-            responseData += d;
+        // do the GET request
+        var reqGet = http.request(options, function(res) {
+            console.log("statusCode: ", res.statusCode);
+            // uncomment it for header details
+            res.on('data', function(d) {
+                console.info('GET result:\n');
+                responseData += d;
+            });
+
+            res.on('end', function() {
+                // console.log(req.data);
+                console.log(responseData);
+                responseData = JSON.parse(responseData);
+                generateBusObj(responseData, callBack);
+            });
         });
 
-        res.on('end', function() {
-            // console.log(req.data);
-            console.log(responseData);
-            responseData = JSON.parse(responseData);
-            generateBusObj(responseData, callBack);
+        reqGet.on('error', function(e) {
+            console.error(e);
         });
-    });
 
-    reqGet.on('error', function(e) {
-        console.error(e);
-    });
-
-    reqGet.end();
+        reqGet.end();
+    }
 }
 
 function generateBusObj(responseData, callBack) {
