@@ -19,8 +19,6 @@ module.exports = {
 	                // the SSL certs already (https://<app-name>.rhcloud.com)
 	            },
 	        };
-	        console.log(TOKEN);
-	        console.log(options);
 	        // OpenShift routes from port :443 to OPENSHIFT_NODEJS_PORT
 	        const domain = process.env.APP_DNS;
 	        const url = `${domain}:443`;
