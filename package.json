@@ -1,14 +1,13 @@
 {
-  "name": "openshift-cartridge-nodejs-template",
+  "name": "sg-busleh",
   "version": "1.0.1",
-  "description": "Custom Node.js cartridge for OpenShift - sample application",
+  "description": "SG Bus Leh is a telegram bot for SG buses",
   "private": true,
   "main": "start.js",
   "scripts": {
     "start": "node start.js"
   },
-  "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
-  "license": "ISC",
+  "author": "Kelvin Cheng",
   "dependencies": {
     "node-telegram-bot-api": "^0.27.0"
   }
