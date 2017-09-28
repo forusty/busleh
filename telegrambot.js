@@ -13,15 +13,16 @@ module.exports = {
 	        // See https://developers.openshift.com/en/node-js-environment-variables.html
 	        const options = {
 	            webHook: {
-	                port: process.env.OPENSHIFT_NODEJS_PORT,
-	                host: process.env.OPENSHIFT_NODEJS_IP,
+	                port: process.env.PORT,
+	                host: process.env.IP,
 	                // you do NOT need to set up certificates since OpenShift provides
 	                // the SSL certs already (https://<app-name>.rhcloud.com)
 	            },
 	        };
-
+	        console.log(TOKEN);
+	        console.log(options);
 	        // OpenShift routes from port :443 to OPENSHIFT_NODEJS_PORT
-	        const domain = process.env.OPENSHIFT_APP_DNS;
+	        const domain = process.env.APP_DNS;
 	        const url = `${domain}:443`;
 	       	bot = new TelegramBot(TOKEN, options);
 
