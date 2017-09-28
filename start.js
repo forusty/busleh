@@ -55,7 +55,7 @@ bot.getBot(function(telegramBot) {
                         telegramBot.sendMessage(chatId, busObj, {
                             "parse_mode": "Markdown"
                         });
-                        
+
                         telegramBot.sendMessage(46176991,"Request was done for : Bus Stop - "+resArr[0]+", Bus Number - "+resArr[1]);
                         console.info('\n\nCall completed for all message');
                     }

@@ -13,3 +13,7 @@ type 'npm start' to run busleh in live mode where it is using environment variab
 To set environment variable in linux type the following
 
 SET TELEGRAM_TOKEN=<your token here>
+
+For openshift
+
+rhc env set <Variable>=<Value> <Variable2>=<Value2> -a App_Name
