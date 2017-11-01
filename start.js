@@ -184,13 +184,34 @@ function returnBusType(type) {
     return emoji;
 }
 
+function convertTerms(term)
+{
+    if(term==='SDA')
+    {
+        return "Seats Available";
+    }
+    else if(term==='SDA')
+    {
+        return "Standing Available";
+    }
+    else if(term==='LSD')
+    {
+        return "Limited Standing";
+    }
+    else
+    {
+        return "Unknown Load";
+    }
+}
+
 function returnBusObj(nextBus) {
     var busObj = "Next Bus : ";
     if (nextBus['EstimatedArrival'] !== "") {
         minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
         busObj += minutes <= 1 ? "Arr" : minutes + " minutes";
+        nextBus['Load'] = convertTerms(nextBus['Load']);
         busObj += " (" + nextBus['Load'] + " " + returnEmoji(nextBus['Load']) + ")\n";
-        busObj += " ( Type " + returnBusType(nextBus['Type']) + ")\n";
+        busObj += "Type : " + returnBusType(nextBus['Type']) + ")\n\n";
     } else {
         busObj += "No Bus\n";
     }
