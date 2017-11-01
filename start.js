@@ -186,7 +186,7 @@ function returnBusType(type) {
 
 function convertTerms(term)
 {
-    if(term==='SDA')
+    if(term==='SEA')
     {
         return "Seats Available";
     }
