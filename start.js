@@ -74,9 +74,9 @@ function sgBus(busStopID, callBack, serviceNo) {
         (typeof serviceNo !== 'undefined' && isNaN(serviceNo))) {
         callBack("Failed");
     } else {
-        var path = "/ltaodataservice/BusArrival";
+        var path = "/ltaodataservice/BusArrivalv2";
         if (typeof busStopID !== "undefined") {
-            path += '?BusStopID=' + busStopID;
+            path += '?BusStopCode=' + busStopID;
 
             if (typeof serviceNo !== "undefined") {
                 path += '&ServiceNo=' + serviceNo;
@@ -134,8 +134,8 @@ function generateBusObj(responseData, callBack) {
                 // first bus
                 var nextBus = bus['NextBus'];
                 busObj += returnBusObj(bus['NextBus']);
-                busObj += returnBusObj(bus['SubsequentBus']);
-                busObj += returnBusObj(bus['SubsequentBus3']);
+                busObj += returnBusObj(bus['NextBus2']);
+                busObj += returnBusObj(bus['NextBus3']);
                 // var minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
                 // busObj += "Next Bus : ";
                 // busObj += minutes <= 1 ? "Arr\n" : minutes + " minutes\n";
@@ -177,12 +177,25 @@ function returnEmoji(load) {
     return emoji;
 }
 
+function returnBusType(type) {
+    var typeText = "Unknown";
+    if (type === 'SD') {
+        typeText = "Single Deck"
+    } else if (type === 'DD') {
+        emoji = "Double Deck"
+    } else if (load === 'BD') {
+        emoji = "Bendy"
+    }
+    return emoji;
+}
+
 function returnBusObj(nextBus) {
     var busObj = "Next Bus : ";
     if (nextBus['EstimatedArrival'] !== "") {
         minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
         busObj += minutes <= 1 ? "Arr" : minutes + " minutes";
         busObj += " (" + nextBus['Load'] + " " + returnEmoji(nextBus['Load']) + ")\n";
+        busObj += " ( Type " + returnBusType(nextBus['Type']) + ")\n";
     } else {
         busObj += "No Bus\n";
     }
