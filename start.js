@@ -211,7 +211,7 @@ function returnBusObj(nextBus) {
         busObj += minutes <= 1 ? "Arr" : minutes + " minutes";
         nextBus['Load'] = convertTerms(nextBus['Load']);
         busObj += " (" + nextBus['Load'] + " " + returnEmoji(nextBus['Load']) + ")\n";
-        busObj += "Type : " + returnBusType(nextBus['Type']) + ")\n\n";
+        busObj += "Type : " + returnBusType(nextBus['Type']) + "\n\n";
     } else {
         busObj += "No Bus\n";
     }
