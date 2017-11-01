@@ -129,8 +129,6 @@ function generateBusObj(responseData, callBack) {
             var bus = responseData['Services'][i];
             busObj += "*Service Number : " + bus['ServiceNo'] + "*\n";
             busObj += "=============================\n"
-
-            if (bus['Status'] === 'In Operation') {
                 // first bus
                 var nextBus = bus['NextBus'];
                 busObj += returnBusObj(bus['NextBus']);
@@ -154,13 +152,10 @@ function generateBusObj(responseData, callBack) {
                 // busObj += "Next Bus : ";
                 // busObj += minutes <= 1 ? "Arr\n" : minutes + " minutes\n";
                 // busObj += " ( " + nextBus['Load'] + " " + returnEmoji(nextBus['Load']) + " )\n";
-            } else {
-                busObj += "Bus not in service";
-            }
             busObj += "\n";
         }
     } else {
-        busObj = "Invalid Bus Number";
+        busObj = "Invalid Bus Number / Bus Not in Service";
     }
     callBack(busObj);
 }
