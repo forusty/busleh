@@ -161,13 +161,13 @@ function generateBusObj(responseData, callBack) {
 }
 
 function returnEmoji(load) {
-    var emoji = "";
+    var emoji = "\u{1F914}";
     if (load === 'Seats Available') {
-        emoji = "\u{1F604}"
+        emoji = "\u{1F604}";
     } else if (load === 'Standing Available') {
-        emoji = "\u{1F605}"
+        emoji = "\u{1F605}";
     } else if (load === 'Limited Standing') {
-        emoji = "\u{1F630}"
+        emoji = "\u{1F630}";
     }
     return emoji;
 }
@@ -178,7 +178,7 @@ function returnBusType(type) {
         typeText = "Single Deck"
     } else if (type === 'DD') {
         emoji = "Double Deck"
-    } else if (load === 'BD') {
+    } else if (type === 'BD') {
         emoji = "Bendy"
     }
     return emoji;
