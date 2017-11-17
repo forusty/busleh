@@ -66,10 +66,6 @@ bot.getBot(function(telegramBot) {
 }, process.argv[2]);
 
 function sgBus(busStopID, callBack, serviceNo) {
-    /**
-     * HOW TO Make an HTTP Call - GET
-     */
-    //
     if (isNaN(busStopID) ||
         (typeof serviceNo !== 'undefined' && isNaN(serviceNo))) {
         callBack("Failed");
@@ -162,6 +158,7 @@ function generateBusObj(responseData, callBack) {
 
 function returnEmoji(load) {
     var emoji = "\u{1F914}";
+    console.log(load);
     if (load === 'Seats Available') {
         emoji = "\u{1F604}";
     } else if (load === 'Standing Available') {
@@ -174,6 +171,7 @@ function returnEmoji(load) {
 
 function returnBusType(type) {
     var typeText = "Unknown";
+    console.log(type);
     if (type === 'SD') {
         typeText = "Single Deck"
     } else if (type === 'DD') {
