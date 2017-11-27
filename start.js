@@ -158,7 +158,6 @@ function generateBusObj(responseData, callBack) {
 
 function returnEmoji(load) {
     var emoji = "\u{1F914}";
-    console.log(load);
     if (load === 'Seats Available') {
         emoji = "\u{1F604}";
     } else if (load === 'Standing Available') {
@@ -171,15 +170,14 @@ function returnEmoji(load) {
 
 function returnBusType(type) {
     var typeText = "Unknown";
-    console.log(type);
     if (type === 'SD') {
         typeText = "Single Deck"
     } else if (type === 'DD') {
-        emoji = "Double Deck"
+        typeText = "Double Deck"
     } else if (type === 'BD') {
-        emoji = "Bendy"
+        typeText = "Bendy"
     }
-    return emoji;
+    return typeText;
 }
 
 function convertTerms(term)
