@@ -5,7 +5,8 @@
   "private": true,
   "main": "start.js",
   "scripts": {
-    "start": "node start.js"
+    "start": "node start.js",
+    "start-dev": "node start.js dev"
   },
   "author": "Kelvin Cheng",
   "dependencies": {

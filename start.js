@@ -130,24 +130,6 @@ function generateBusObj(responseData, callBack) {
                 busObj += returnBusObj(bus['NextBus']);
                 busObj += returnBusObj(bus['NextBus2']);
                 busObj += returnBusObj(bus['NextBus3']);
-                // var minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
-                // busObj += "Next Bus : ";
-                // busObj += minutes <= 1 ? "Arr\n" : minutes + " minutes\n";
-                // busObj += " ( " + nextBus['Load'] + " " + returnEmoji(nextBus['Load']) + " )\n";
-
-                // second bus
-                // nextBus = bus['SubsequentBus'];
-                // minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
-                // busObj += "Next Bus : ";
-                // busObj += minutes <= 1 ? "Arr\n" : minutes + " minutes\n";
-                // busObj += " ( " + nextBus['Load'] + " " + returnEmoji(nextBus['Load']) + " )\n";
-
-                // third bus
-                // nextBus = bus['SubsequentBus3'];
-                // minutes = timeDiff(new Date().getTime(), new Date(nextBus['EstimatedArrival']).getTime())
-                // busObj += "Next Bus : ";
-                // busObj += minutes <= 1 ? "Arr\n" : minutes + " minutes\n";
-                // busObj += " ( " + nextBus['Load'] + " " + returnEmoji(nextBus['Load']) + " )\n";
             busObj += "\n";
         }
     } else {
