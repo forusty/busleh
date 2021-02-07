@@ -9,7 +9,7 @@ module.exports = {
     	var bot;
     	if(mode !=='dev')
     	{
-	        const TOKEN = process.env.TELEGRAM_TOKEN || '***REMOVED***';
+	        const TOKEN = process.env.TELEGRAM_TOKEN;
 	        // See https://developers.openshift.com/en/node-js-environment-variables.html
 	        const options = {
 	            webHook: {
@@ -30,9 +30,9 @@ module.exports = {
     	}
     	else{
     		console.log("DEV MODE");
-	        var token = '***REMOVED***';
+	        const TOKEN = process.env.TELEGRAM_TOKEN;
 			// Setup polling way
-			bot = new TelegramBot(token, {
+			bot = new TelegramBot(TOKEN, {
 			    polling: true
 			});
     	}

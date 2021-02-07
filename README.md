@@ -2,9 +2,13 @@
 
 type 'npm install' to install all the required dependencies before running project for the first time.
 
+# Set API Token
+SET LTA_API_KEY=
+SET TELEGRAM_TOKEN=
+
 # Running in Dev Mode
 
-type 'npm start dev' to run busleh in dev mode where it is using hardcoded token file
+type 'npm start dev' or 'npm run start-dev' to run busleh in dev mode where it is using hardcoded token file
 
 # Running in Production Mode
 
